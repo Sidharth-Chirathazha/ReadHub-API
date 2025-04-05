@@ -50,6 +50,6 @@ class LogoutView(APIView):
             return Response({"message": "Logged out successfully"}, status=status.HTTP_205_RESET_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    
 class CustomTokenRefreshView(TokenRefreshView):
-
     permission_classes = [AllowAny]

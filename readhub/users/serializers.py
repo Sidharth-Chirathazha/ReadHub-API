@@ -1,7 +1,7 @@
 from rest_framework import serializers
 import logging
 from django.contrib.auth import get_user_model
-from .validators import email_validator,username_validator,password_validator
+from base.validators import email_validator,username_validator,password_validator
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 
