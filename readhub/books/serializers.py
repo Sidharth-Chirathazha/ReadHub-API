@@ -20,8 +20,7 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-        fields = ["id", "title", "authors", "genre", "publication_date", "description", "created_by"]
-        read_only_fields = ["created_by"]
+        fields = ["id", "title", "authors", "genre", "publication_date", "description"]
 
     def validate_title(self, value):
         text_validator(value, field="Title")

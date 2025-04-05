@@ -47,14 +47,15 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'users',
-    'books'
+    'books',
+    'readinglists'
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
-    "users.auth_backend.EmailOrUsernameBackend",  # Custom backend
-    "django.contrib.auth.backends.ModelBackend",  # Default backend
+    "users.auth_backend.EmailOrUsernameBackend",  
+    "django.contrib.auth.backends.ModelBackend",  
 ]
 
 MIDDLEWARE = [

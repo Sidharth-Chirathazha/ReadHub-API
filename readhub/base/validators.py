@@ -19,18 +19,22 @@ def password_validator(password):
         raise serializers.ValidationError("Password cannot contain spaces.")
     
 def author_validator(value):
-        """Ensure author names contain only alphabets and are not empty"""
-        for author in value:
-            if not author["name"].strip():
-                raise serializers.ValidationError("Author name cannot be empty.")
-            if not re.match(r"^[A-Za-z\s]+$", author["name"]):
-                raise serializers.ValidationError("Author name can only contain alphabets and spaces.")
-        return value
+    for author in value:
+        name = author["name"].strip()
+        if not name:
+            raise serializers.ValidationError("Author name cannot be empty.")
+        
+        if not re.match(r"^[A-Za-z]", name):
+            raise serializers.ValidationError("Author name must start with an alphabet.")
+
+        if not re.match(r"^[A-Za-z][A-Za-z\s.]*$", name):
+            raise serializers.ValidationError("Author name can only contain alphabets, spaces, and periods.")
+
+    return value
 
 def text_validator(value, field):
-    """Ensure text fields starts with an alphabet and does not start with spaces or special characters"""
-    if not re.match(r"^[A-Za-z]", value):
-        raise serializers.ValidationError(f"{field} must start with an alphabet.")
+    if not re.match(r"^[A-Za-z0-9]", value):
+        raise serializers.ValidationError(f"{field} must start with an alphabet or a number and not a space or special character.")
     
 
 def date_validator(value):
