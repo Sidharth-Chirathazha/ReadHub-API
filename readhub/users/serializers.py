@@ -1,7 +1,7 @@
 from rest_framework import serializers
 import logging
 from django.contrib.auth import get_user_model
-from base.validators import email_validator,username_validator,password_validator
+from base.validators import email_validator,username_validator,password_validator,name_validator
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -46,9 +46,15 @@ class RegistrationSerializer(serializers.ModelSerializer):
     
 
 class UserSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(validators=[lambda value: username_validator(value)])
+    firstname = serializers.CharField(validators=[lambda value: name_validator(value, "First Name")])
+    lastname = serializers.CharField(validators=[lambda value: name_validator(value, "Last Name")])
     class Meta:
         model = User
-        fields = ["id", "username", "email"]
+        fields = ["id", "username", "email", "firstname", "lastname"]
+        extra_kwargs = {
+            "email": {"read_only": True}
+        }
     
 
 class LoginSerializer(serializers.Serializer):

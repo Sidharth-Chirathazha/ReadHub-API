@@ -7,7 +7,10 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from django.db.utils import IntegrityError
 from rest_framework.views import APIView
 from .serializers import RegistrationSerializer,LoginSerializer,UserSerializer,LogoutSerializer
+from django.contrib.auth import get_user_model
 
+
+User = get_user_model()
 # Create your views here.
 
 class RegistrationView(APIView):
@@ -24,6 +27,24 @@ class RegistrationView(APIView):
             except Exception as e:  
                 return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class EditProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request):
+        user = request.user
+        serializer = UserSerializer(user, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            new_username = request.data.get("username")
+            if new_username and new_username != user.username:
+                if User.objects.filter(username=new_username).exclude(id=user.id).exists():
+                    return Response({"error": "This username is already taken."}, status=status.HTTP_400_BAD_REQUEST)
+            serializer.save()
+            return Response({"message": "Profile updated successfully."})
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     
 class LoginView(APIView):
     permission_classes = [AllowAny]

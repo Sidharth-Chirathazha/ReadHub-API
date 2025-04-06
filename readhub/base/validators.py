@@ -32,9 +32,13 @@ def author_validator(value):
 
     return value
 
-def text_validator(value, field):
+def text_validator(value, field="This field"):
     if not re.match(r"^[A-Za-z0-9]", value):
         raise serializers.ValidationError(f"{field} must start with an alphabet or a number and not a space or special character.")
+    
+def name_validator(value, field="This field"):
+    if not re.match(r"^[A-Za-z]+$", value):
+        raise serializers.ValidationError(f"{field} must contain only alphabets and no spaces or special characters.")
     
 
 def date_validator(value):
