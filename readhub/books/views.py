@@ -11,7 +11,7 @@ from .serializers import BookSerializer
 # Create your views here.
 
 class BookViewSet(ModelViewSet):
-    queryset = Book.objects.all()
+    queryset = Book.objects.all().order_by('-id')
     serializer_class = BookSerializer
 
     def get_permissions(self):
