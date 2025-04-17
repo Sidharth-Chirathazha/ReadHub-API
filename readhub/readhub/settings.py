@@ -95,6 +95,8 @@ DATABASES = {
     'default': env.db(),
 }
 
+# postgresql://readhub_user:Ttj8XuPFSuCHoaSMeFb1tj6FoqXND4Ja@dpg-cvvt89je5dus73ckgll0-a/readhub
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
