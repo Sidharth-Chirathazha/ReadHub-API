@@ -95,7 +95,7 @@ DATABASES = {
     'default': env.db(),
 }
 
-# postgresql://readhub_user:Ttj8XuPFSuCHoaSMeFb1tj6FoqXND4Ja@dpg-cvvt89je5dus73ckgll0-a/readhub
+
 
 
 # Password validation
@@ -141,10 +141,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",  # Use JWT for auth
+        "rest_framework_simplejwt.authentication.JWTAuthentication",  
     ),
     "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.IsAuthenticated",  # Default permission (change as needed)
+        "rest_framework.permissions.IsAuthenticated",  
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
@@ -153,10 +153,10 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),  # Access token expires in 30 mins
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # Refresh token lasts 7 days
-    "ROTATE_REFRESH_TOKENS": True,  # Generates a new refresh token upon refresh
-    "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old refresh token after rotation
-    "AUTH_HEADER_TYPES": ("Bearer",),  # Uses 'Bearer <token>' format in Authorization header
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),  
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  
+    "ROTATE_REFRESH_TOKENS": True,  
+    "BLACKLIST_AFTER_ROTATION": True,  
+    "AUTH_HEADER_TYPES": ("Bearer",),  
 }
 
